@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    MyNavigation()
                 }
             }
         }
@@ -30,14 +30,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MyNavigation()
+{
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Home.route)
+    {
+        composable(Home.route)
+        {
+            HomeScreen(navController)
+        }
+        composable(Second.route)
+        {
+            SecondScreen(navController)
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     Team_Work_nav_SHRK_SDK25Theme {
-        Greeting("Android")
+        MyNavigation()
     }
 }
